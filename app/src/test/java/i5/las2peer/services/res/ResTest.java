@@ -118,11 +118,37 @@ public class ResTest {
 
   /**
    * 
-   * Test for the SimplePOSTdishratingtest_ID6108 method.
+   * Test for the Createdishratingfornon-existingdish_ID87996 method.
    * 
    */
   @Test
-  public void testSimplePOSTdishratingtest_ID6108() {
+  public void testCreatedishratingfornon-existingdish_ID87996() {
+    MiniClientCoverage c = new MiniClientCoverage(mainPath);
+    c.setConnectorEndpoint(connector.getHttpEndpoint());
+    
+        
+    try {
+      c.setLogin(AnonymousAgentImpl.IDENTIFIER, "");
+      ClientResponse result = c.sendRequest("POST", "/dishes/{id}/ratings", """
+{}""", "application/json", "*/*", new HashMap<>(), "9999");
+      System.out.println("Result of request with id: 72406: " + result.getResponse().trim());
+    
+      Assert.assertEquals("[685016]", 404, result.getHttpCode());
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      fail("Exception: " + e);
+    }
+
+    
+  }
+  /**
+   * 
+   * Test for the Successfulcreatedishratingtest_ID395443 method.
+   * 
+   */
+  @Test
+  public void testSuccessfulcreatedishratingtest_ID395443() {
     MiniClientCoverage c = new MiniClientCoverage(mainPath);
     c.setConnectorEndpoint(connector.getHttpEndpoint());
     
@@ -134,13 +160,39 @@ public class ResTest {
   "stars": 5,
   "comment": "Delicious!"
 }""", "application/json", "*/*", new HashMap<>(), "1");
-      System.out.println("Result of request with id: 206520: " + result.getResponse().trim());
+      System.out.println("Result of request with id: 32631: " + result.getResponse().trim());
     
-      Assert.assertEquals("[442302]", 201, result.getHttpCode());
+      Assert.assertEquals("[98288]", 201, result.getHttpCode());
   Object response = JSONValue.parse(result.getResponse().trim());
       // Response body has field "id" has type Number
-      assertThat("[906537]", response, both(isA(JSONObject.class)).and(asJSONObject(hasField("id", isA(Number.class)))));
+      assertThat("[301193]", response, both(isA(JSONObject.class)).and(asJSONObject(hasField("id", isA(Number.class)))));
       
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      fail("Exception: " + e);
+    }
+
+    
+  }
+  /**
+   * 
+   * Test for the Createdishratingemptybodytest_ID835357 method.
+   * 
+   */
+  @Test
+  public void testCreatedishratingemptybodytest_ID835357() {
+    MiniClientCoverage c = new MiniClientCoverage(mainPath);
+    c.setConnectorEndpoint(connector.getHttpEndpoint());
+    
+        
+    try {
+      c.setLogin(AnonymousAgentImpl.IDENTIFIER, "");
+      ClientResponse result = c.sendRequest("POST", "/dishes/{id}/ratings", """
+{}""", "application/json", "*/*", new HashMap<>(), "1");
+      System.out.println("Result of request with id: 539483: " + result.getResponse().trim());
+    
+      Assert.assertEquals("[471283]", 400, result.getHttpCode());
 
     } catch (Exception e) {
       e.printStackTrace();
